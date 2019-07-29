@@ -44,18 +44,40 @@ export const deleteData = (id, month, year) => dispatch => {
   });
 };
 
-export const addData = (price, month, year) => dispatch => {
+export const closeModal = () => {
+  return {
+    type: actionTypes.CLOSE_MODAL
+  };
+};
+
+export const startAddData = () => {
+  return {
+    type: actionTypes.START_ADD_DATA
+  };
+};
+
+export const finishAddData = () => {
+  return {
+    type: actionTypes.FINISH_ADD_DATA
+  };
+};
+
+export const submitData = (date, price, month, year) => dispatch => {
+  const d = new Date(date);
+
   base("Table 1").create(
     {
-      Day: "2019-07-01",
-      stockPrice: 100
+      Day: +d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear(),
+      stockPrice: +price
     },
-    function(err, record) {
+    (err, record) => {
       if (err) {
-        console.error(err);
+        console.error("Error", err);
         return;
       }
       console.log(record.getId());
+      dispatch(initialize(month, year));
+      dispatch(closeModal());
     }
   );
 };

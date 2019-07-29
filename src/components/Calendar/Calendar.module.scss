@@ -1,3 +1,6 @@
+$primary: #1386fc;
+$danger: #cc2121;
+
 .Calendar {
   width: 100%;
 
@@ -20,14 +23,14 @@
 .StockPrice {
   margin: 4px;
   font-weight: bold;
-  color: #1386fc;
+  color: $primary;
 }
 
 .Delete {
   position: absolute;
   top: -20px;
   right: 0;
-  background: #cc2121;
+  background: $danger;
   width: 15px;
   height: 15px;
   color: white;
@@ -55,5 +58,51 @@
 
   &:hover {
     box-shadow: 0px 0px 5px #777;
+  }
+}
+
+.ModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  h3,
+  p {
+    margin: 10px 0;
+  }
+
+  h3 {
+    // margin-bottom: 25px;
+  }
+
+  input {
+    height: 25px;
+    outline: none;
+    background: #eee;
+    border: 2px solid $primary;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 2px 10px;
+  }
+
+  button {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 10px;
+    outline: none;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+
+    &:hover {
+      box-shadow: 0px 0px 5px #777;
+    }
+  }
+
+  .Cancel {
+    background: $danger;
+  }
+
+  .AddData {
+    background: $primary;
   }
 }

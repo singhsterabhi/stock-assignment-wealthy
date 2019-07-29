@@ -3,7 +3,8 @@ import * as actionTypes from "./actionTypes";
 const initialState = {
   stockData: null,
   month: 7,
-  year: 2019
+  year: 2019,
+  addDataModalShow: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +13,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         stockData: action.data
+      };
+    case actionTypes.START_ADD_DATA:
+      return {
+        ...state,
+        addDataModalShow: true
+      };
+    case actionTypes.CLOSE_MODAL:
+      return {
+        ...state,
+        addDataModalShow: false
       };
     default:
       return state;
