@@ -14,9 +14,13 @@ class CalenderComponent extends Component {
 
   render() {
     const el = ({ date, view }) => {
-      const clickHandler = (d, v) => {
-        console.log(d, v);
+      const deleteHandler = (d, v, id) => {
+        this.props.OnDelete(id, this.props.month, this.props.year);
       };
+      const addHandler = (date, view) => {
+        console.log(date);
+      };
+
       let day = +date.toLocaleString().substring(0, 2);
 
       return (
@@ -28,21 +32,21 @@ class CalenderComponent extends Component {
               </p>
               <div
                 className={classes.Delete}
-                onClick={() => clickHandler(date, view)}>
+                onClick={() =>
+                  deleteHandler(date, view, this.props.data[day].id)
+                }>
                 x
               </div>
             </>
           ) : (
-            <div
-              className={classes.Add}
-              onClick={() => clickHandler(date, view)}>
+            <div className={classes.Add} onClick={() => addHandler(date, view)}>
               ADD
             </div>
           )}
         </div>
       );
     };
-    console.log("render");
+
     return (
       <div>
         {this.props.data ? (
@@ -51,7 +55,6 @@ class CalenderComponent extends Component {
             minDetail="month"
             tileContent={el}
             showNeighboringMonth={false}
-            onClickDay={value => alert("Clicked day: " + value)}
             value={new Date()}
           />
         ) : null}
@@ -70,7 +73,8 @@ const MapStateToProps = state => {
 
 const MapDispatchToProps = dispatch => {
   return {
-    OnInit: (m, y) => dispatch(actions.initialize(m, y))
+    OnInit: (m, y) => dispatch(actions.initialize(m, y)),
+    OnDelete: (id, m, y) => dispatch(actions.deleteData(id, m, y))
   };
 };
 

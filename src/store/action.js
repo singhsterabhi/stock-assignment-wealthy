@@ -33,3 +33,29 @@ export const initialize = (month, year) => dispatch => {
       }
     );
 };
+
+export const deleteData = (id, month, year) => dispatch => {
+  base("Table 1").destroy(id, (err, deletedRecord) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    dispatch(initialize(month, year));
+  });
+};
+
+export const addData = (price, month, year) => dispatch => {
+  base("Table 1").create(
+    {
+      Day: "2019-07-01",
+      stockPrice: 100
+    },
+    function(err, record) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(record.getId());
+    }
+  );
+};

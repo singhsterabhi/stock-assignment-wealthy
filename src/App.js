@@ -15,6 +15,9 @@ function App() {
         </div>
         <div id="right-panel">{/* <h1>Right panel</h1> */}</div>
       </div>
+      <div className="Modal">
+        <h3>modal</h3>
+      </div>
     </div>
   );
 }
