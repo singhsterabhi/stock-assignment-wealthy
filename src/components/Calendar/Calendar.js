@@ -1,57 +1,15 @@
 import React, { Component } from "react";
 import Calendar from "react-calendar";
-import { base } from "../../airtable";
+import { connect } from "react-redux";
+
+import * as actions from "../../store/action";
 
 import classes from "./Calendar.module.scss";
+import "./Calendar.css";
 
 class CalenderComponent extends Component {
-  state = {
-    data: null,
-    month: 0
-  };
-  async componentDidMount() {
-    // const start = new Date(2019, 6, 30).toString();
-    // console.log(start);
-    let r = {};
-    let month;
-    await base("Table 1")
-      .select({
-        // Selecting the first 3 records in Grid view:
-        view: "Grid view"
-        // filterByFormula: `AND(IS_AFTER('7/1/2019', TODAY())`
-      })
-      .eachPage(
-        (records, fetchNextPage) => {
-          // This function (`page`) will get called for each page of records.
-          // console.log(records);
-
-          records.forEach(function(record) {
-            // console.log("Retrieved", record);
-            let day = record.fields.Day;
-            day = +day.substring(day.length - 2, day.length);
-            r[day] = { ...record["fields"], id: record["id"] };
-          });
-
-          month = records[0].fields.Day;
-          month = +month.substring(month.length - 5, month.length - 3);
-
-          this.setState((prevState, props) => {
-            return { data: r, month };
-          });
-          // this.setState({ data: r });
-          // return r;
-          // To fetch the next page of records, call `fetchNextPage`.
-          // If there are more records, `page` will get called again.
-          // If there are no more records, `done` will get called.
-          // fetchNextPage();
-        },
-        err => {
-          if (err) {
-            console.error(err);
-            return;
-          }
-        }
-      );
+  componentDidMount() {
+    this.props.OnInit(this.props.month, this.props.year);
   }
 
   render() {
@@ -63,10 +21,10 @@ class CalenderComponent extends Component {
 
       return (
         <div className={classes.StockData}>
-          {this.state.data && this.state.data[day] ? (
+          {this.props.data && this.props.data[day] ? (
             <>
               <p className={classes.StockPrice}>
-                Rs. {this.state.data[day].stockPrice}
+                Rs. {this.props.data[day].stockPrice}
               </p>
               <div
                 className={classes.Delete}
@@ -75,7 +33,11 @@ class CalenderComponent extends Component {
               </div>
             </>
           ) : (
-            <div onClick={() => clickHandler(date, view)}>ADD</div>
+            <div
+              className={classes.Add}
+              onClick={() => clickHandler(date, view)}>
+              ADD
+            </div>
           )}
         </div>
       );
@@ -83,13 +45,14 @@ class CalenderComponent extends Component {
     console.log("render");
     return (
       <div>
-        <h3>calendar</h3>
-        {this.state.data ? (
+        {this.props.data ? (
           <Calendar
             className={classes.Calendar}
             minDetail="month"
             tileContent={el}
             showNeighboringMonth={false}
+            onClickDay={value => alert("Clicked day: " + value)}
+            value={new Date()}
           />
         ) : null}
       </div>
@@ -97,4 +60,21 @@ class CalenderComponent extends Component {
   }
 }
 
-export default CalenderComponent;
+const MapStateToProps = state => {
+  return {
+    data: state.stockData,
+    month: state.month,
+    year: state.year
+  };
+};
+
+const MapDispatchToProps = dispatch => {
+  return {
+    OnInit: (m, y) => dispatch(actions.initialize(m, y))
+  };
+};
+
+export default connect(
+  MapStateToProps,
+  MapDispatchToProps
+)(CalenderComponent);

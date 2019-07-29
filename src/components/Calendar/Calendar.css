@@ -1,0 +1,11 @@
+.react-calendar__tile--active p {
+  /* background: greenyellow !important; */
+  color: white !important;
+}
+
+.react-calendar {
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px #aaa;
+  border: 1px solid #e0e0df;
+  padding: 5px;
+}

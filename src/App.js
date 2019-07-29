@@ -11,12 +11,9 @@ function App() {
       </header>
       <div className="Main">
         <div id="left-panel">
-          <h3>Left panel</h3>
           <Calendar />
         </div>
-        <div id="right-panel">
-          <h1>Right panel</h1>
-        </div>
+        <div id="right-panel">{/* <h1>Right panel</h1> */}</div>
       </div>
     </div>
   );
