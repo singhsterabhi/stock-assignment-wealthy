@@ -1,0 +1,39 @@
+$primary: #1386fc;
+
+.Panel {
+  min-height: calc(100vh - 57px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h3 {
+    font-size: 30px;
+    color: $primary;
+    margin: 5px;
+  }
+
+  & > div {
+    flex-grow: 1;
+    border-bottom: 1px solid #1386fc;
+  }
+}
+
+.Profit {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chart {
+  align-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.Date {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

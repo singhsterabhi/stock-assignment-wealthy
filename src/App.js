@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 
 import Calendar from "./components/Calendar/Calendar";
+import RightPanel from "./components/RightPanel/RightPanel";
 
 function App() {
   return (
@@ -13,10 +14,9 @@ function App() {
         <div id="left-panel">
           <Calendar />
         </div>
-        <div id="right-panel">{/* <h1>Right panel</h1> */}</div>
-      </div>
-      <div className="Modal">
-        <h3>modal</h3>
+        <div id="right-panel">
+          <RightPanel />
+        </div>
       </div>
     </div>
   );

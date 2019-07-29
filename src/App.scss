@@ -22,12 +22,12 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  min-height: calc(100vh - 1em - 20px);
+  min-height: calc(100vh - 57px);
 
   #left-panel {
     flex-basis: 65%;
     padding: 30px;
-    border-right: 1px dotted #1386fc;
+    border-right: 1px solid #1386fc;
   }
 
   #right-panel {

@@ -7,6 +7,7 @@ import * as actions from "../../store/action";
 import classes from "./Calendar.module.scss";
 import "./Calendar.css";
 import Modal from "../Modal/Modal";
+import Spinner from "../Spinner/Spinner";
 
 class CalenderComponent extends Component {
   state = {
@@ -14,11 +15,11 @@ class CalenderComponent extends Component {
     stockprice: 0
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // if (nextState.addingDataOn !== this.state.addingDataOn) return false;
-    // if (nextProps.isModalOpen !== this.props.isModalOpen) return false;
-    return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // if (nextState.addingDataOn !== this.state.addingDataOn) return false;
+  //   // if (nextProps.isModalOpen !== this.props.isModalOpen) return false;
+  //   return true;
+  // }
 
   componentDidMount() {
     this.props.OnInit(this.props.month, this.props.year);
@@ -94,9 +95,17 @@ class CalenderComponent extends Component {
             minDetail="month"
             tileContent={el}
             showNeighboringMonth={false}
-            value={new Date()}
+            value={this.props.currentDate}
+            onActiveDateChange={({ activeStartDate, view }) => {
+              const d = new Date(activeStartDate);
+              console.log(1 + d.getMonth(), d.getFullYear());
+              this.props.OnChangeMonthYear(activeStartDate);
+            }}
+            onChange={value => this.props.OnChangeDate(value)}
           />
-        ) : null}
+        ) : (
+          <Spinner />
+        )}
         <Modal
           isOpen={this.props.isModalOpen}
           handleCloseModal={this.props.OnCloseModal}>
@@ -136,7 +145,8 @@ const MapStateToProps = state => {
     data: state.stockData,
     month: state.month,
     year: state.year,
-    isModalOpen: state.addDataModalShow
+    isModalOpen: state.addDataModalShow,
+    currentDate: state.currentDate
   };
 };
 
@@ -146,7 +156,9 @@ const MapDispatchToProps = dispatch => {
     OnDelete: (id, m, y) => dispatch(actions.deleteData(id, m, y)),
     OnAddData: () => dispatch(actions.startAddData()),
     OnCloseModal: () => dispatch(actions.closeModal()),
-    OnSubmitData: (d, p, m, y) => dispatch(actions.submitData(d, p, m, y))
+    OnSubmitData: (d, p, m, y) => dispatch(actions.submitData(d, p, m, y)),
+    OnChangeMonthYear: d => dispatch(actions.changeMonthYear(d)),
+    OnChangeDate: d => dispatch(actions.changeCurrentDate(d))
   };
 };
 

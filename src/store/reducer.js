@@ -4,7 +4,10 @@ const initialState = {
   stockData: null,
   month: 7,
   year: 2019,
-  addDataModalShow: false
+  addDataModalShow: false,
+  currentDate: new Date(),
+  profit: 0,
+  sellDate: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +26,23 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         addDataModalShow: false
+      };
+    case actionTypes.CHANGE_MONTH_YEAR:
+      return {
+        ...state,
+        month: action.month,
+        year: action.year
+      };
+    case actionTypes.CHANGE_CURRENT_DATE:
+      return {
+        ...state,
+        currentDate: action.currentDate
+      };
+    case actionTypes.SET_PROFIT:
+      return {
+        ...state,
+        profit: action.profit,
+        sellDate: action.sellDate
       };
     default:
       return state;
