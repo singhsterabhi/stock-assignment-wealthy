@@ -31,7 +31,7 @@ class CalenderComponent extends Component {
   };
 
   submitData = () => {
-    console.log("submitting");
+    // console.log("submitting");
     this.props.OnSubmitData(
       this.state.addingDataOn,
       this.state.stockprice,
@@ -45,7 +45,7 @@ class CalenderComponent extends Component {
   };
 
   render() {
-    console.log("rendering...");
+    // console.log("rendering...");
     const el = ({ date, view }) => {
       const deleteHandler = (d, v, id) => {
         this.props.OnDelete(id, this.props.month, this.props.year);
@@ -97,8 +97,8 @@ class CalenderComponent extends Component {
             showNeighboringMonth={false}
             value={this.props.currentDate}
             onActiveDateChange={({ activeStartDate, view }) => {
-              const d = new Date(activeStartDate);
-              console.log(1 + d.getMonth(), d.getFullYear());
+              // const d = new Date(activeStartDate);
+              // console.log(1 + d.getMonth(), d.getFullYear());
               this.props.OnChangeMonthYear(activeStartDate);
             }}
             onChange={value => this.props.OnChangeDate(value)}

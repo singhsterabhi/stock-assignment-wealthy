@@ -7,8 +7,8 @@ import Chart from "./ChartDisplay/ChartDipslay";
 import classes from "./RightPanel.module.scss";
 
 const rightPanel = props => {
-  console.log(props.buyDate);
-  console.log(props.sellDate);
+//   console.log(props.buyDate);
+//   console.log(props.sellDate);
 
   return (
     <>

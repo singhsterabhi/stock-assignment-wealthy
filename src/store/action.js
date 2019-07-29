@@ -111,7 +111,7 @@ export const submitData = (date, price, month, year) => dispatch => {
         console.error("Error", err);
         return;
       }
-      console.log(record.getId());
+      // console.log(record.getId());
       dispatch(initialize(month, year));
       dispatch(closeModal());
     }

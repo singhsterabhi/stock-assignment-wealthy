@@ -22,7 +22,7 @@ class ChartDisplay extends Component {
         y: data[k].stockPrice
       });
     });
-    console.log(d);
+    // console.log(d);
     return d;
   };
 
