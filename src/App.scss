@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  font-size: 1.5em;
+  color: white;
+  h1 {
+    margin: 0;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  #left-panel {
+    flex-grow: 2;
+    padding: 0 30px;
+  }
+
+  #right-panel {
+    flex-grow: 1;
+  }
+}

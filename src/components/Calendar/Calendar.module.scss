@@ -1,0 +1,50 @@
+.Calendar {
+  width: 100%;
+
+  button:disabled {
+    color: black;
+    background: white !important;
+  }
+
+  button:hover {
+    .Delete {
+      display: block;
+    }
+  }
+
+  button.react-calendar__tile--active {
+    p.StockPrice {
+      color: white !important;
+    }
+  }
+}
+
+.StockData {
+  position: relative;
+}
+
+.StockPrice {
+  margin: 4px;
+  font-weight: bold;
+  color: blueviolet;
+}
+
+.Delete {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  background: #cc2121;
+  width: 15px;
+  height: 15px;
+  color: white;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: none;
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: bold;
+
+  &:hover {
+    box-shadow: 0px 0px 5px #777;
+  }
+}
