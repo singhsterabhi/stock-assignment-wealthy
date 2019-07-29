@@ -29,9 +29,9 @@ const rightPanel = props => {
           )}
         </div>
         <div className={classes.Date}>
-          {props.data && !Object.keys(props.data).length > 0 ? (
-            <p>Add data in this month to View report</p>
-          ) : props.data && Object.keys(props.data).length > 0 ? (
+          {props.sellDate === null ? (
+            <p>Add data to View report</p>
+          ) : (
             <>
               <div>
                 <h3>{new Date(props.buyDate).toLocaleDateString()}</h3>
@@ -42,8 +42,6 @@ const rightPanel = props => {
                 <p>Sell Date</p>
               </div>
             </>
-          ) : (
-            <Spinner />
           )}
         </div>
       </div>
