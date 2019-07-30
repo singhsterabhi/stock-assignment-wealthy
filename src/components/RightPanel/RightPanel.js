@@ -7,8 +7,8 @@ import Chart from "./ChartDisplay/ChartDipslay";
 import classes from "./RightPanel.module.scss";
 
 const rightPanel = props => {
-//   console.log(props.buyDate);
-//   console.log(props.sellDate);
+  //   console.log(props.buyDate);
+  //   console.log(props.sellDate);
 
   return (
     <>
@@ -18,7 +18,7 @@ const rightPanel = props => {
           <p>Profit</p>
         </div>
         <div className={classes.Chart}>
-          {props.data ? (
+          {props.data && !props.loading ? (
             Object.keys(props.data).length > 0 ? (
               <Chart data={props.data} />
             ) : (
@@ -29,8 +29,10 @@ const rightPanel = props => {
           )}
         </div>
         <div className={classes.Date}>
-          {props.sellDate === null ? (
-            <p>Add data to View report</p>
+          {props.loading ? (
+            <Spinner />
+          ) : props.sellDate === null ? (
+            <p>Add data in this month to View report</p>
           ) : (
             <>
               <div>
@@ -54,7 +56,8 @@ const MapStateToProps = state => {
     profit: state.profit,
     sellDate: state.sellDate,
     buyDate: state.currentDate,
-    data: state.stockData
+    data: state.stockData,
+    loading: state.loading
   };
 };
 

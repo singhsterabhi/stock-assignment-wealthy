@@ -2,12 +2,13 @@ import * as actionTypes from "./actionTypes";
 
 const initialState = {
   stockData: null,
-  month: 7,
-  year: 2019,
+  month: 1 + new Date().getMonth(),
+  year: new Date().getFullYear(),
   addDataModalShow: false,
   currentDate: new Date(),
   profit: 0,
-  sellDate: null
+  sellDate: null,
+  loading: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +44,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         profit: action.profit,
         sellDate: action.sellDate
+      };
+    case actionTypes.CHANGE_LOADING:
+      return {
+        ...state,
+        loading: action.loading
       };
     default:
       return state;

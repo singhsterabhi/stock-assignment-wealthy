@@ -1,6 +1,13 @@
 import * as actionTypes from "./actionTypes";
 import { base } from "../airtable";
 
+export const changeLoading = loading => {
+  return {
+    type: actionTypes.CHANGE_LOADING,
+    loading
+  };
+};
+
 export const setInit = data => {
   return {
     type: actionTypes.INITIALIZE,
@@ -46,6 +53,8 @@ export const calculateProfit = data => (dispatch, getState) => {
 
 export const initialize = (month, year) => dispatch => {
   let r = {};
+  // dispatch(calculateProfit(r));
+  // dispatch(setInit(r));
   base("Table 1")
     .select({
       view: "Grid view",
@@ -60,6 +69,7 @@ export const initialize = (month, year) => dispatch => {
         });
         dispatch(calculateProfit(r));
         dispatch(setInit(r));
+        dispatch(changeLoading(false));
       },
       err => {
         if (err) {
@@ -127,6 +137,9 @@ export const setMonthYear = (m, y) => {
 };
 
 export const changeMonthYear = activeStartDate => dispatch => {
+  dispatch(setInit({}));
+  dispatch(setProfit(0, null));
+  dispatch(changeLoading(true));
   let m = 1 + new Date(activeStartDate).getMonth();
   let y = new Date(activeStartDate).getFullYear();
   dispatch(setCurrentDate(activeStartDate));
