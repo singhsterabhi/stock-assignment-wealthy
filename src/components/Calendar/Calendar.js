@@ -113,7 +113,7 @@ class CalenderComponent extends Component {
             <h3>Add Stock Data</h3>
             <p>
               Date :{" "}
-              <span>{new Date(this.state.addingDataOn).toLocaleString()}</span>
+              <span>{new Date(this.state.addingDataOn).toLocaleDateString()}</span>
             </p>
             <label htmlFor="stockprice">Stock Price : </label>
             <input

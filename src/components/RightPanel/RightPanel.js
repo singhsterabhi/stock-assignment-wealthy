@@ -32,7 +32,7 @@ const rightPanel = props => {
           {props.loading ? (
             <Spinner />
           ) : props.sellDate === null ? (
-            <p>Add data in this month to View report</p>
+            <p>Add data to View report</p>
           ) : (
             <>
               <div>
